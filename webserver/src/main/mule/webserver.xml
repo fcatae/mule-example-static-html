@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="cfd0eb47-75ab-46b6-b7e9-1e71b4bd07a5" >
+		<http:listener-connection host="0.0.0.0" port="80" />
+	</http:listener-config>
+	<flow name="webserverFlow" doc:id="e32d95b9-f220-4c4b-ba0b-818b973c7c1e" >
+		<http:listener doc:name="HTTP (Port 80)" doc:id="2133d88c-4f62-4d2c-9fb0-1abe9721ca5b" path="*" config-ref="HTTP_Listener_config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a51e14a9-fa39-4d42-8d6a-1d4700677728" message="${app.home}"/>
+		<http:load-static-resource doc:name="Load static resource" doc:id="a377b314-7a20-42d3-a1ab-196f7bd5b889" resourceBasePath='${app.home}/static'/>
+	</flow>
+</mule>
